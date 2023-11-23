@@ -1,2 +1,2 @@
 # project1
-Latihan 1 Cloud Computing
+Latihan 1 GIT Cloud Computing
