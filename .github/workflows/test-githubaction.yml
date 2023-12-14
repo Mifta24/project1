@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} in Actions 🚀
 on: 
     push:
         branches:
-              -main
+          -main
               
 jobs:
   Build-and-push-docker-image:
