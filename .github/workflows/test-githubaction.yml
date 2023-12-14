@@ -1,4 +1,4 @@
-name: GitHub Actions Test 2
+name: GitHub Actions to publish docker image
 run-name: ${{ github.actor }} in Actions 🚀
 on: 
     push:
@@ -6,16 +6,16 @@ on:
               -main
               
 jobs:
-  Explore-GitHub-Actions:
+  Build-and-push-docker-image:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       
       - name: Check out repository code
         uses: actions/checkout@v4
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
+      - name: Build and taq docker image
         run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."  
+          docker build -t ${{secrets.USERNAME}}/action-project1:v1 -f Dockerfile .
+
+      - name: push to DockerHub
+        run: docker login -u ${{secrets.USERNAME}} -p ${{secrets.ACCESS_TOKEN}} && \
+            docker push ${{secrets.USERNAME}}/action-project1:v1
